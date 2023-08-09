@@ -1,0 +1,5 @@
+<h1> Edit List </h1> 
+
+<%= render partial: "form", locals: {list: @list} %>
+
+<%= button_to "Delete", @list, method: :delete, data: {turbo_confirm: "Are you sure?"} %>

@@ -1,0 +1,23 @@
+<div class="bg-gray-100 p-8 min-h-screen">
+  <h2 class="text-3xl font-semibold mb-4"><%= @list.title %></h2>
+
+  <ul class="space-y-2">
+    <% @list.items.each do |item| %>
+      <li class="flex items-center justify-between border-b border-gray-300 py-2">
+        <span class="<%= item.completed ? 'line-through text-gray-500' : 'text-gray-800' %>"><%= item.title %></span>
+        <%= button_to 'Delete', list_item_path(@list, item), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-500" %>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= form_with model: [@list, @list.items.build], remote: true do |form| %>
+    <div class="mt-4 flex">
+      <%= form.text_field :title, placeholder: 'Add new item', class: "flex-grow px-4 py-2 border border-gray-300 rounded-l" %>
+      <%= form.submit 'Add', class: 'bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600' %>
+    </div>
+  <% end %>
+
+  <%= button_to 'Delete List', list_path(@list), method: :delete, data: { confirm: 'Are you sure?' }, class: "mt-4 text-red-500 hover:text-red-600" %> 
+  <%= link_to 'See All Lists', root_path, class: "text-blue-500 hover:text-blue-600" %> 
+</div>
+
